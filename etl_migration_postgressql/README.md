@@ -304,9 +304,9 @@ attention before committing to a migration.
 
 
 
-What was skipped and why 
+**What was skipped and why **
 
-CHECK constraints — 6 skipped
+**CHECK constraints — 6 skipped**
 
 ck_employee_birthdate, ck_employee_hiredateUses :- MSSQL YEAR() / DAY() functions — PostgreSQL uses EXTRACT(year FROM col) instead
 
@@ -314,11 +314,11 @@ ck_product_productline, ck_product_class, ck_product_style :- UPPER(col) IN (...
 
 ck_productinventory_shelf :- [Shelf] LIKE '[A-Za-z]' — MSSQL LIKE pattern, PostgreSQL uses ~ '^[A-Za-z]$'
 
-FK — 2 skipped
+**FK — 2 skipped**
 fk_salesorderdetail_specialofferproduct — This FK references a composite key (specialofferid, productid) on specialofferproduct. The retry logic added a unique constraint but the FK still has a duplicate entry in the audit from MSSQL extracting it twice. The data integrity is intact because the PK already enforces uniqueness.
 
 
-Views — 11 skipped
+**Views — 11 skipped**
 
 CROSS APPLY / OUTER APPLY — MSSQL-specific, no direct PG equivalent :- 5 views
 
@@ -329,5 +329,10 @@ XML .value() / .nodes() method calls — MSSQL XML type feature :- 3 views
 Column alias syntax "colname" = expression — MSSQL style :- 2 views
 
 
-Procedures — 3 skipped
-All 3 are T-SQL procedures that need manual rewrite to PL/pgSQL. The logic is intact in C:\migration\audit.json under procedures.
+**Procedures — 3 skipped**
+All 3 are T-SQL procedures that need manual rewrite to PL/pgSQL.
+
+**Function**
+Functions, that are present all are MS SQL sever specific which are all on dbo schema since we are not migrating that schema the function are automatically dropped.
+
+Reason why dbo schema was skipped during migration the dbo schema in SQL Server is the default schema assigned to system-level and administrative objects. It is specific to the SQL Server platform and contains no business data.
