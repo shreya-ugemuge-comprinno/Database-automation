@@ -54,6 +54,21 @@ python migrate_mysql.py --windows-auth ^
   --out C:\migration_mysql ^
   --drop-target
 ```
+```
+python migrate_mysql.py ^
+  --windows-auth ^
+  --src-host <SOURCE_SQL_SERVER_HOST> ^
+  --src-db <SOURCE_DATABASE_NAME> ^
+  --tgt-host <MYSQL_HOST> ^
+  --tgt-db <TARGET_DATABASE_NAME> ^
+  --tgt-user <MYSQL_USERNAME> ^
+  --tgt-pass <MYSQL_PASSWORD> ^
+  --skip-schema <SCHEMA_TO_SKIP> ^
+  --out <OUTPUT_DIRECTORY> ^
+  --drop-target
+  
+```
+
 
 ### SQL Server Authentication
 ```cmd
